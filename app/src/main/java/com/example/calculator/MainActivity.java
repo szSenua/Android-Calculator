@@ -60,14 +60,17 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.btnMPlus).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View view){
-                tempfigure.add(Double.parseDouble(txtScreen.getText().toString()));
-                memory1 = memory1 + tempfigure.get(0);
-                tempfigure1 = 0;
-                tempfigure.removeAll(tempfigure);
-                txtScreen.setText("0");
-                if (memory1 > 0) {
-                    txtScreen.setText("Memory saved");
+            public void onClick (View view) {
+
+                if (lastNumeric && !stateError) {
+                    tempfigure.add(Double.parseDouble(txtScreen.getText().toString()));
+                    memory1 = memory1 + tempfigure.get(0);
+                    tempfigure1 = 0;
+                    tempfigure.removeAll(tempfigure);
+                    txtScreen.setText("0");
+                    if (memory1 > 0) {
+                        txtScreen.setText("Memory saved");
+                    }
                 }
             }
         });
@@ -75,13 +78,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnMMinus).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tempfigure.add(Double.parseDouble(txtScreen.getText().toString()));
-                memory1=memory1-tempfigure.get(0);
-                tempfigure1=0;
-                tempfigure.removeAll(tempfigure);
-                txtScreen.setText("0");
-                if (memory1>0){
-                    txtScreen.setText("Memory Saved");
+                if (lastNumeric && !stateError) {
+                    tempfigure.add(Double.parseDouble(txtScreen.getText().toString()));
+                    memory1 = memory1 - tempfigure.get(0);
+                    tempfigure1 = 0;
+                    tempfigure.removeAll(tempfigure);
+                    txtScreen.setText("0");
+                    if (memory1 > 0) {
+                        txtScreen.setText("Memory Saved");
+                    }
                 }
             }
         });
@@ -97,21 +102,23 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnMS).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                tempfigure.add(Double.parseDouble(txtScreen.getText().toString()));
-                memory1=tempfigure.get(0);
-                if (memory1>0){
-                    txtScreen.setText("Saved");
+                if (lastNumeric && !stateError) {
+                    tempfigure.add(Double.parseDouble(txtScreen.getText().toString()));
+                    memory1 = tempfigure.get(0);
                 }
+
             }
         });
 
         findViewById(R.id.btnMc).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                memory1=0;
-                tempfigure1=0;
-                tempfigure.removeAll(tempfigure);
-                txtScreen.setText("0");
+                if (lastNumeric && !stateError) {
+                    memory1 = 0;
+                    tempfigure1 = 0;
+                    tempfigure.removeAll(tempfigure);
+                    txtScreen.setText("0");
+                }
             }
         });
 
@@ -120,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (lastNumeric && !stateError) {
-                    int result = Integer.parseInt(txtScreen.getText().toString()) * -1;
+                    Double result = Double.parseDouble(txtScreen.getText().toString()) * -1;
                     txtScreen.setText(String.valueOf(result));
                 }
             }
