@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,8 +22,15 @@ public class MainActivity extends AppCompatActivity {
 
     //Declaramos los botones que realizan operaciones
     private int[] operatorButtons = {R.id.btnEqual, R.id.btnPlus, R.id.btnMinus, R.id.btnPlusMinus,
-    R.id.btnDivision, R.id.btnMMinus, R.id.btn1x, R.id.btnC, R.id.btnx2, R.id.btnRoot, R.id.btnMultiplication,
-    R.id.btnPercentage, R.id.btnCE, R.id.btnMc, R.id.btnMr, R.id.btnMS, R.id.btnMx, R.id.btnMPlus};
+    R.id.btnDivision, R.id.btn1x, R.id.btnC, R.id.btnx2, R.id.btnRoot, R.id.btnMultiplication,
+    R.id.btnPercentage, R.id.btnCE, R.id.btnDEL};
+
+    //Declaramos los botones de memoria
+    //private int[] memoryButtons = {R.id.btnMMinus, R.id.btnMc, R.id.btnMS, R.id.btnMx, R.id.btnMPlus, R.id.btnMr};
+
+    ArrayList<Double> tempfigure = new ArrayList<Double>();
+    double tempfigure1;
+    double memory1 = 0;
 
     //Declaramos la pantalla
     private TextView txtScreen;
@@ -49,6 +57,76 @@ public class MainActivity extends AppCompatActivity {
 
         //Encuentra y añade un OnClickListener a los botones de operaciones
             setOperatorOnClickListener();
+
+        findViewById(R.id.btnMPlus).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick (View view){
+                tempfigure.add(Double.parseDouble(txtScreen.getText().toString()));
+                memory1 = memory1 + tempfigure.get(0);
+                tempfigure1 = 0;
+                tempfigure.removeAll(tempfigure);
+                txtScreen.setText("0");
+                if (memory1 > 0) {
+                    txtScreen.setText("Memory saved");
+                }
+            }
+        });
+
+        findViewById(R.id.btnMMinus).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempfigure.add(Double.parseDouble(txtScreen.getText().toString()));
+                memory1=memory1-tempfigure.get(0);
+                tempfigure1=0;
+                tempfigure.removeAll(tempfigure);
+                txtScreen.setText("0");
+                if (memory1>0){
+                    txtScreen.setText("Memory Saved");
+                }
+            }
+        });
+
+        findViewById(R.id.btnMr).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txtScreen.setText(""+memory1);
+
+            }
+        });
+
+        findViewById(R.id.btnMS).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempfigure.add(Double.parseDouble(txtScreen.getText().toString()));
+                memory1=tempfigure.get(0);
+                if (memory1>0){
+                    txtScreen.setText("Saved");
+                }
+            }
+        });
+
+        findViewById(R.id.btnMc).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                memory1=0;
+                tempfigure1=0;
+                tempfigure.removeAll(tempfigure);
+                txtScreen.setText("0");
+            }
+        });
+
+        findViewById(R.id.btnPlusMinus).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (lastNumeric && !stateError) {
+                    int result = Integer.parseInt(txtScreen.getText().toString()) * -1;
+                    txtScreen.setText(String.valueOf(result));
+                }
+            }
+        });
+
+
     }
 
     private void setNumericOnClickListener(){
@@ -76,6 +154,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+
     //Encuentra y añade un onClickListener a todos los botones operadores, botón de igual y boton de punto decimal.
     private void setOperatorOnClickListener(){
         //Creo un onClickListener común para los operadores
@@ -96,6 +176,22 @@ public class MainActivity extends AppCompatActivity {
         for (int id : operatorButtons){
             findViewById(id).setOnClickListener(listener);
         }
+
+
+
+        //botón de borrar la última posición
+        findViewById(R.id.btnDEL).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    String str;
+                    str = txtScreen.getText().toString();
+                    str = str.substring(0, str.length() - 1);
+                    txtScreen.setText(str);
+                }
+                catch (Exception e){}
+            }
+        });
 
         //Punto decimal
 
@@ -134,6 +230,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+
     private void onEqual(){
         //Si el estado actual es error, no hace nada
         //Si únicamente el ultimo input es un número, la calculadora da solución
@@ -156,6 +254,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
 
 
 
