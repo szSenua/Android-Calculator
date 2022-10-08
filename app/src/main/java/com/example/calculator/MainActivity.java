@@ -110,6 +110,49 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //1x o inversión
+        findViewById(R.id.btn1x).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (lastNumeric && !stateError) {
+                    txtScreen.setText(txtScreen.getText().toString()+ "^" + "(-1)");
+                }
+            }
+        });
+
+        //Raiz cuadrada
+
+        findViewById(R.id.btnRoot).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!stateError && ((txtScreen.getText().length() > 0)) && txtScreen.getText().toString().matches("^([0-9])*$") ){
+                    String str = txtScreen.getText().toString();
+                    Double result = Math.sqrt(Double.parseDouble(str));
+                    txtScreen.setText(result.toString());
+
+                }else{
+                    txtScreen.setText("Valor erróneo");
+                }
+            }
+        });
+
+        //x2 cuadrado de
+
+        findViewById(R.id.btnx2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!stateError && ((txtScreen.getText().length() > 0)) && txtScreen.getText().toString().matches("^([0-9])*$") ){
+                    double d = Double.parseDouble(txtScreen.getText().toString());
+                    double square = d * d;
+                    txtScreen.setText(String.valueOf(square));
+                }else{
+                    txtScreen.setText("Valor erróneo");
+                }
+            }
+        });
+
+
+
         findViewById(R.id.btnMc).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,19 +165,40 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //percentage
+
+        findViewById(R.id.btnPercentage).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Double result = Double.parseDouble(txtScreen.getText().toString())/(100);
+                txtScreen.setText(result.toString());
+            }
+        });
+
+        //Signed or unsigned button
+
         findViewById(R.id.btnPlusMinus).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if (lastNumeric && !stateError) {
-                    Double result = Double.parseDouble(txtScreen.getText().toString()) * -1;
-                    txtScreen.setText(String.valueOf(result));
+                if (!stateError) {
+                    String state = String.valueOf(txtScreen.getText().length());
+                    String newState = "";
+                    if (txtScreen.getText().toString().startsWith("-")) {
+                        StringBuffer stringBuffer = new StringBuffer(state);
+                        newState = stringBuffer.substring(1, state.length());
+                    }
+
+                    txtScreen.setText("-" + newState.toString());
+                }else{
+                    txtScreen.setText("-" + txtScreen.getText().toString());
                 }
             }
         });
-
-
     }
+
+
+
 
     private void setNumericOnClickListener(){
         //Creo un onClickListener común

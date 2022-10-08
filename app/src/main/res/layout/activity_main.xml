@@ -115,19 +115,19 @@
                 android:id="@+id/btn1x"
                 android:layout_width="105dp"
                 android:layout_height="wrap_content"
-                android:text="1/X" />
+                android:text="1/x" />
 
             <Button
                 android:id="@+id/btnx2"
                 android:layout_width="105dp"
                 android:layout_height="wrap_content"
-                android:text="X2" />
+                android:text="x²" />
 
             <Button
                 android:id="@+id/btnRoot"
                 android:layout_width="105dp"
                 android:layout_height="wrap_content"
-                android:text="2X" />
+                android:text="√" />
 
             <Button
                 android:id="@+id/btnDivision"
