@@ -198,8 +198,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     private void setNumericOnClickListener(){
         //Creo un onClickListener común
         View.OnClickListener listener = new View.OnClickListener() {
@@ -280,6 +278,19 @@ public class MainActivity extends AppCompatActivity {
         //Boton C
 
         findViewById(R.id.btnC).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txtScreen.setText(""); //limpia la pantalla
+                //reseteo todos los estados y flags
+                lastNumeric = false;
+                stateError = false;
+                lastDot = false;
+            }
+        });
+
+        //Boton CE
+
+        findViewById(R.id.btnCE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 txtScreen.setText(""); //limpia la pantalla
