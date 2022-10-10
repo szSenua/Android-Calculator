@@ -156,12 +156,12 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btnMc).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (lastNumeric && !stateError) {
+
                     memory1 = 0;
                     tempfigure1 = 0;
                     tempfigure.removeAll(tempfigure);
                     txtScreen.setText("0");
-                }
+
             }
         });
 
@@ -222,7 +222,6 @@ public class MainActivity extends AppCompatActivity {
             findViewById(id).setOnClickListener(listener);
         }
     }
-
 
 
     //Encuentra y añade un onClickListener a todos los botones operadores, botón de igual y boton de punto decimal.
@@ -311,8 +310,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
-
 
     private void onEqual(){
         //Si el estado actual es error, no hace nada
